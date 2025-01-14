@@ -15,7 +15,7 @@ const Home = () => {
 
     const fetchCards=async()=>{
       console.log(userState)
-      const response=await fetch("http://localhost:6789/api/card/",{
+      const response=await fetch("https://course-helper-backend.onrender.com/api/card/",{
         headers:{
           "Content-Type":"application/json",
           "Authorization":`Bearer ${userState?userState.token : JSON.parse(localStorage.getItem("user")).token}`

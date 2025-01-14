@@ -38,7 +38,7 @@ const UpdatePage = () => {
   const handleUpdate=async function(e){
     console.log(userState.token)
     e.preventDefault()
-    const response=await fetch(`http://localhost:6789/api/card/${card_course_id}`,{
+    const response=await fetch(`https://course-helper-backend.onrender.com/api/card/${card_course_id}`,{
         method:"PATCH",
         body:JSON.stringify({course_credits:dynamic_course_credits,image_url:dynamic_card_course_image_url,remarks:dynamic_course_remarks,course_title:dynamic_course_title}),
         headers:{

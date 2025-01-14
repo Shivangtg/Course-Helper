@@ -14,7 +14,7 @@ const Card = ({cardData}) => {
   
   const {userState}=useUserContext()
   const deletingCard=async function(){
-    const response=await fetch(`http://localhost:6789/api/card/${cardData._id}`,{
+    const response=await fetch(`https://course-helper-backend.onrender.com/api/card/${cardData._id}`,{
         method:"DELETE",
         headers:{
             "Authorization":`Bearer ${userState.token}`

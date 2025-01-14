@@ -41,7 +41,7 @@ const AddingNewCourse = () => {
     const decoded=jwtDecode(userState.token)
     const reqBody=image_url?(remarks?{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id}):(remarks?{course_credits:parseInt(course_credits),course_title,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,user_id:decoded._id})
     console.log(reqBody,JSON.stringify(reqBody))
-    const response=await fetch("http://localhost:6789/api/card/",{
+    const response=await fetch("https://course-helper-backend.onrender.com/api/card/",{
         method:"POST",
         headers:{
             'Content-Type':'application/json',

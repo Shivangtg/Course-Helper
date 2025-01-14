@@ -27,7 +27,7 @@ const Signup = () => {
 
   const handleSubmit=async function(e){
     e.preventDefault()
-    const response=await fetch("http://localhost:6789/api/user/signup",{
+    const response=await fetch("https://course-helper-backend.onrender.com/api/user/signup",{
         method:"POST",
         body:JSON.stringify({email,password,username:name}),
         headers:{
