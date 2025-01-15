@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import { useUserContext } from "./hooks/useUserContext"
 import UpdatePage from "./pages/UpdatePage"
+import ForgotPassword from "./pages/ForgotPassword"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/adding_course" element={<AddingNewCourse/>}/>
                 <Route path="/update" element={userState?<UpdatePage/>:<Navigate to="/login" />}/>
+                <Route path="/forgotPassword" element={<ForgotPassword/>}/>
               </Routes>
             </div>
           </BrowserRouter>

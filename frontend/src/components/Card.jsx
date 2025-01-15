@@ -22,10 +22,10 @@ const Card = ({cardData}) => {
     })
     const json=await response.json();
     if(response.ok){
-        console.log("deleted the card",json.data);
+        // console.log("deleted the card",json.data);
         setCardState({type:"DELETE_CARD",payload:json.data._id})
     }else{
-        console.log("can'nt delete the card",json.error)
+        // console.log("can'nt delete the card",json.error)
     }
   }
   

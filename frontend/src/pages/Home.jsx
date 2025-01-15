@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(()=>{
 
     const fetchCards=async()=>{
-      console.log(userState)
+      // console.log(userState)
       const response=await fetch("https://course-helper-backend.onrender.com/api/card/",{
         headers:{
           "Content-Type":"application/json",
@@ -28,7 +28,7 @@ const Home = () => {
         })
         setCardState({type:"SET_CARDS",payload:cardElement})
       }else{
-        console.log("can't fetch data",json.error);
+        // console.log("can't fetch data",json.error);
       }
     }
 

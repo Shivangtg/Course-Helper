@@ -25,7 +25,7 @@ const UpdatePage = () => {
   document.getElementsByTagName('body')[0].style.transition="0.5s"
   const formBorder=(theme=="dark"?"2px solid yellow":"2px solid white")
   const formShadow=(theme=="dark"?"0 0 1px yellow":"0 0 10px #eb00ff")
-
+  const [error,setError]=useState("");
   
 
   //Setting User Context
@@ -36,8 +36,9 @@ const UpdatePage = () => {
 
 
   const handleUpdate=async function(e){
-    console.log(userState.token)
+    // console.log(userState.token)
     e.preventDefault()
+    setError("");
     const response=await fetch(`https://course-helper-backend.onrender.com/api/card/${card_course_id}`,{
         method:"PATCH",
         body:JSON.stringify({course_credits:dynamic_course_credits,image_url:dynamic_card_course_image_url,remarks:dynamic_course_remarks,course_title:dynamic_course_title}),
@@ -48,11 +49,14 @@ const UpdatePage = () => {
     });
     const json=await response.json();
     if(response.ok){
-        console.log("Updated card with id",card_course_id);
-        navigate("/")
+        setError("");
+        // console.log("Updated card with id",card_course_id);
+        
+        navigate("/");
         return ;
     }
-    console.log("error in loging in user",json.error)
+    setError(json.error)
+    // console.log("error in loging in user",json.error)
   }
 
 
@@ -81,6 +85,7 @@ const UpdatePage = () => {
             
         </div>
     </form>
+      {error!=""?<div className='error'>{error}</div>:[""]}
     </div>
   )
 }

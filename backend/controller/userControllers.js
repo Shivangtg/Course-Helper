@@ -74,4 +74,29 @@ const signupUser=async (req,res)=>{
     }
 }
 
-module.exports={loginUser,signupUser}
+const forgotPassword=async (req,res)=>{
+    if(!req.body.email||!req.body.password){
+        console.log("Please provide all the inputs");
+        res.status(400).json({
+            success:false,message:"Please provide all the inputs",error:"Please provide all the inputs"
+        })
+    }
+    try {
+        //hashing the password
+        const hashedPassword=await bcryptjs.hash(req.body.password,10);
+        
+        const userToUpdate=await user.findOneAndUpdate({email:req.body.email},{password:hashedPassword});
+        
+        //making the token
+        const token=jwt.sign({_id:userToUpdate._id},process.env.SECRET_KEY,{expiresIn:"2d"});
+        
+        console.log("Password changed")
+        res.json({
+            success:true,message:"Password changed",token,name:userToUpdate.username
+        })
+    } catch (error) {
+        console.log("frogot password error encounterd",error)
+        res.status(400).json({success:false,error})
+    }
+}
+module.exports={loginUser,signupUser,forgotPassword}

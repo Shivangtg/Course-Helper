@@ -16,7 +16,7 @@ const AddingNewCourse = () => {
   const [course_credits,set_course_credits]=useState('');
   const [image_url,set_image_url]=useState('');
   const [remarks,set_remarks]=useState('');
-  
+  const [error,setError]=useState("");
 
   //For Styling Purposes
   const {theme}=useThemeContext()
@@ -36,11 +36,13 @@ const AddingNewCourse = () => {
   // const {_id}=decoder(useState.token)
   // console.log("shivang",_id)
   const handleSubmit=async function(e){
-    e.preventDefault()
-    console.log(course_credits,course_title,image_url)
+    e.preventDefault();
+    setError("");
+
+    // console.log(course_credits,course_title,image_url)
     const decoded=jwtDecode(userState.token)
     const reqBody=image_url?(remarks?{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id}):(remarks?{course_credits:parseInt(course_credits),course_title,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,user_id:decoded._id})
-    console.log(reqBody,JSON.stringify(reqBody))
+    // console.log(reqBody,JSON.stringify(reqBody))
     const response=await fetch("https://course-helper-backend.onrender.com/api/card/",{
         method:"POST",
         headers:{
@@ -49,14 +51,16 @@ const AddingNewCourse = () => {
         },
         body:JSON.stringify(reqBody),
     })
-    console.log(response)
+    // console.log(response)
     const json=await response.json()
     if(response.ok){
+        setError("");
         const newCard=<Card cardData={json.data}/>
         setCardState({type:"ADD_CARD",payload:newCard})
         navigate("/")
     }else{
-        console.log("can't add course to the card list",json.error)
+        setError(json.error)
+        // console.log("can't add course to the card list",json.error)
     }
   }
 
@@ -79,6 +83,7 @@ const AddingNewCourse = () => {
         
         <button>Add Course</button>
     </form>
+      {error!=""?<div className='error'>{error}</div>:[""]}
     </div>
   )
 }

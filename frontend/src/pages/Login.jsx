@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email,set_email]=useState('');
   const [password,set_password]=useState('');
-
+  const [error,setError]=useState("");
 
   //styling purposes only
   const {theme}=useThemeContext()
@@ -25,7 +25,9 @@ const Login = () => {
   const navigate=useNavigate()
 
   const handleSubmit=async function(e){
-    e.preventDefault()
+    e.preventDefault();
+    setError("");
+    
     const response=await fetch("https://course-helper-backend.onrender.com/api/user/login",{
         method:"POST",
         body:JSON.stringify({email,password}),
@@ -35,13 +37,16 @@ const Login = () => {
     });
     const json=await response.json();
     if(response.ok){
+        setError("");
         setUserState({type:"LOGIN",payload:json});
         localStorage.setItem("user",JSON.stringify(json))
         console.log("User Logged in");
-        navigate("/")
+        
+        navigate("/");
         return ;
     }
-    console.log("error in loging in user",json.error)
+    setError(json.error)
+    // console.log("error in loging in user",json.error)
   }
 
 
@@ -57,9 +62,13 @@ const Login = () => {
         <input type="password" name='password' value={password} onChange={(e)=>{set_password(e.currentTarget.value)}}/>
         <div className='bottom-line'>
         <button>Login</button>
-        <Link style={{color:textColor}} to="/signup">New User?</Link>
+        <div>
+          <Link style={{color:textColor,textDecoration:`underline ${textColor}`}} to="/signup">New User?</Link>
+          <Link style={{color:textColor,textDecoration:`underline ${textColor}`}} to="/forgotPassword">forgot password</Link>
+        </div>
         </div>
     </form>
+      {error!=""?<div className='error'>{error}</div>:[""]}
     </div>
   )
 }

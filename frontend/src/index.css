@@ -236,3 +236,12 @@ form button{
   padding: 0.5rem;
   border-radius: 2px;
 }
+
+
+/* Error styling  */
+.error{
+  background-color: #ffefef;
+  color:#e7195a;
+  border:  1px solid #e7195a;
+  border-radius: 4px;
+}
