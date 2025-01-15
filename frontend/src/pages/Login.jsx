@@ -68,7 +68,7 @@ const Login = () => {
         <input type="password" name='password' value={password} onChange={(e)=>{set_password(e.currentTarget.value)}}/>
         <div className='bottom-line'>
         <button>Login</button>
-        <div>
+        <div className='login-link-div'>
           <Link style={{color:textColor,textDecoration:`underline ${textColor}`}} to="/signup">New User?</Link>
           <Link style={{color:textColor,textDecoration:`underline ${textColor}`}} to="/forgotPassword">forgot password</Link>
         </div>
