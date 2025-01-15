@@ -224,7 +224,7 @@ form button{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  align-content: center;
+  align-items: center;
 }
 .bottom-line a{
   font-size: 1.5rem;
