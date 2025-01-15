@@ -7,3 +7,4 @@ new user data is stored on mongoose atlas you can add a new user, change the det
 If you want to use it locally make sure to create a .env file in the backend folder and providing information such as listening PORT and MONGO_URI and SECRET_KEY for your token in it also do change the fetch API links in the front end src folder make sure to install the dependencies of both frontend and backend using
 ```npm i```
 in the respective folders 
+Visit this link for the website "https://course-helper-beta.vercel.app/" 
