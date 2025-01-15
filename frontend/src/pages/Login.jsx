@@ -41,7 +41,7 @@ const Login = () => {
           setError("");
           setUserState({type:"LOGIN",payload:json});
           localStorage.setItem("user",JSON.stringify(json))
-          console.log("User Logged in");
+          // console.log("User Logged in");
           
           navigate("/");
           return ;
