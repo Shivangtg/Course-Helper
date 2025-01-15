@@ -58,7 +58,7 @@ const ForgotPassword = () => {
     <div className='adding-course-container' style={{border:formBorder,boxShadow:`${formShadow}`}}>
     <form onSubmit={handleSubmit}>
 
-        <h2>Login</h2>
+        <h2>Change Your Password</h2>
         <label>Email:</label>
         <input type="email" name='email' value={email} onChange={(e)=>{set_email(e.currentTarget.value)}}/>
 
