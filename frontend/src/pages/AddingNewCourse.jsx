@@ -85,6 +85,7 @@ const AddingNewCourse = () => {
         <label>Course Remarks:</label>
         <input type="text" name='remarks' value={remarks} onChange={(e)=>{set_remarks(e.currentTarget.value)}}/>
         
+        <textarea name='course_remarks' value={remarks} onChange={(e)=>{set_remarks(e.currentTarget.value)}}></textarea>
         <button>Add Course</button>
     </form>
       {error!=""?<div className='error'>{error}</div>:[""]}

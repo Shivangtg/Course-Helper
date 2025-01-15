@@ -12,21 +12,27 @@ const loginUser=async (req,res)=>{
     try {
         
         const demandedUser=await user.findOne({ email: req.body.email })
-        const isCorrect=await bcryptjs.compare(req.body.password,demandedUser.password)
-        if(isCorrect){
-            const token=jwt.sign({_id:demandedUser._id},process.env.SECRET_KEY,{expiresIn:"2d"});
-            
-            console.log("User Logged In")
-            res.json({
-                success:true,message:"User Logged In",token,name:demandedUser.username
-            })
+        if(!demandedUser){
+            console.log("No such user present")
+            res.status(404).json({success:false,error:"No such user present"})
             return ;
         }
-        console.log("did'nt find the user with required credentials")
-        res.status(400).json({
-            success:false,message:"did'nt find the user with required credentials",error:"did'nt find the user with required credentials"})
+        const isCorrect=await bcryptjs.compare(req.body.password,demandedUser.password)
+        if(!isCorrect){
+            console.log("Wrong password");
+            res.status(400).json({success:false,error:"Wrong password"});
+            return ;
+        }
+        const token=jwt.sign({_id:demandedUser._id},process.env.SECRET_KEY,{expiresIn:"2d"});
+            
+        console.log("User Logged In");
+        res.json({
+            success:true,message:"User Logged In",token,name:demandedUser.username
+        })
+        return ;
     } catch (error) {
         console.log("Login error encountered",error)
+        res.status(400).json({success:false,error})
     }
 }
 
