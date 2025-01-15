@@ -39,23 +39,29 @@ const UpdatePage = () => {
     // console.log(userState.token)
     e.preventDefault()
     setError("");
-    const response=await fetch(`https://course-helper-backend.onrender.com/api/card/${card_course_id}`,{
+    try {
+      const response=await fetch(`https://course-helper-backend.onrender.com/api/card/${card_course_id}`,{
         method:"PATCH",
         body:JSON.stringify({course_credits:dynamic_course_credits,image_url:dynamic_card_course_image_url,remarks:dynamic_course_remarks,course_title:dynamic_course_title}),
         headers:{
             "Content-Type":"application/json",
             Authorization:`Bearer ${userState.token}`
         }
-    });
-    const json=await response.json();
-    if(response.ok){
-        setError("");
-        // console.log("Updated card with id",card_course_id);
-        
-        navigate("/");
-        return ;
+      });
+      const json=await response.json();
+      if(response.ok){
+          setError("");
+          // console.log("Updated card with id",card_course_id);
+          
+          navigate("/");
+          return ;
+      }
+      setError(json.error)
+    } catch (error) {
+      console.log(error)
     }
-    setError(json.error)
+    
+    
     // console.log("error in loging in user",json.error)
   }
 

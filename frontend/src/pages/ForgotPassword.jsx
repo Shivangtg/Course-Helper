@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ForgotPassword = () => {
   const [email,set_email]=useState('');
   const [new_password,set_new_password]=useState('');
-
+  const [error,setError]=useState("");
 
   //styling purposes only
   const {theme}=useThemeContext()
@@ -25,22 +25,31 @@ const ForgotPassword = () => {
   const navigate=useNavigate()
 
   const handleSubmit=async function(e){
-    e.preventDefault()
-    const response=await fetch("https://course-helper-backend.onrender.com/api/user/forgotPassword",{
-        method:"PATCH",
-        body:JSON.stringify({email,password:new_password}),
-        headers:{
-            "Content-Type":"application/json"
+    e.preventDefault();
+    setError("");
+
+    try {
+        const response=await fetch("https://course-helper-backend.onrender.com/api/user/forgotPassword",{
+            method:"PATCH",
+            body:JSON.stringify({email,password:new_password}),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        const json=await response.json();
+        if(response.ok){
+            setError("");
+            setUserState({type:"LOGIN",payload:json});
+            localStorage.setItem("user",JSON.stringify(json))
+            console.log("User Logged in");
+            navigate("/")
+            return ;
         }
-    });
-    const json=await response.json();
-    if(response.ok){
-        setUserState({type:"LOGIN",payload:json});
-        localStorage.setItem("user",JSON.stringify(json))
-        console.log("User Logged in");
-        navigate("/")
-        return ;
+        setError(json.error)
+    } catch (error) {
+        console.log(error)
     }
+    
     // console.log("error in loging in user",json.error)
   }
 
@@ -60,6 +69,7 @@ const ForgotPassword = () => {
         
         </div>
     </form>
+      {error!=""?<div className='error'>{error}</div>:[""]}
     </div>
   )
 }

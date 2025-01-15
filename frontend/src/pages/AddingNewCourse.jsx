@@ -38,8 +38,8 @@ const AddingNewCourse = () => {
   const handleSubmit=async function(e){
     e.preventDefault();
     setError("");
-
-    // console.log(course_credits,course_title,image_url)
+    try {
+      // console.log(course_credits,course_title,image_url)
     const decoded=jwtDecode(userState.token)
     const reqBody=image_url?(remarks?{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,image_url,user_id:decoded._id}):(remarks?{course_credits:parseInt(course_credits),course_title,user_id:decoded._id,remarks}:{course_credits:parseInt(course_credits),course_title,user_id:decoded._id})
     // console.log(reqBody,JSON.stringify(reqBody))
@@ -62,6 +62,10 @@ const AddingNewCourse = () => {
         setError(json.error)
         // console.log("can't add course to the card list",json.error)
     }
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   return (

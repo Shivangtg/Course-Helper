@@ -28,24 +28,30 @@ const Login = () => {
     e.preventDefault();
     setError("");
     
-    const response=await fetch("https://course-helper-backend.onrender.com/api/user/login",{
+    try {
+      const response=await fetch("https://course-helper-backend.onrender.com/api/user/login",{
         method:"POST",
         body:JSON.stringify({email,password}),
         headers:{
             "Content-Type":"application/json"
         }
-    });
-    const json=await response.json();
-    if(response.ok){
-        setError("");
-        setUserState({type:"LOGIN",payload:json});
-        localStorage.setItem("user",JSON.stringify(json))
-        console.log("User Logged in");
-        
-        navigate("/");
-        return ;
+      });
+      const json=await response.json();
+      if(response.ok){
+          setError("");
+          setUserState({type:"LOGIN",payload:json});
+          localStorage.setItem("user",JSON.stringify(json))
+          console.log("User Logged in");
+          
+          navigate("/");
+          return ;
+      }
+      setError(json.error)
+    } catch (error) {
+      console.log(error)
     }
-    setError(json.error)
+
+    
     // console.log("error in loging in user",json.error)
   }
 
