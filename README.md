@@ -8,3 +8,4 @@ If you want to use it locally make sure to create a .env file in the backend fol
 ```npm i```
 in the respective folders 
 Visit this link for the website "https://course-helper-beta.vercel.app/" 
+![Screenshot 2025-01-15 144332](https://github.com/user-attachments/assets/5d338f85-a5e4-41ab-91fd-de3ba7ad12f1)
