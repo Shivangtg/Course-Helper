@@ -83,7 +83,7 @@ const AddingNewCourse = () => {
         <input type="text" name='image_url' value={image_url} onChange={(e)=>{set_image_url(e.currentTarget.value)}}/>
         
         <label>Course Remarks:</label>
-        <input type="text" name='remarks' value={remarks} onChange={(e)=>{set_remarks(e.currentTarget.value)}}/>
+        {/* <input type="text" name='remarks' value={remarks} onChange={(e)=>{set_remarks(e.currentTarget.value)}}/> */}
         
         <textarea name='course_remarks' value={remarks} onChange={(e)=>{set_remarks(e.currentTarget.value)}}></textarea>
         <button>Add Course</button>
