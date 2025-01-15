@@ -68,7 +68,7 @@ const UpdateACard=async (req,res)=>{
     try {
         
         if(!req.body.course_credits||!req.body.course_title){
-            console.log("You are required to fill atleast course_title and course_credits",error:"You are required to fill atleast course_title and course_credits")
+            console.log("You are required to fill atleast course_title and course_credits")
             res.status(400).json({success:false,message:"You are required to fill atleast course_title and course_credits",error:"You are required to fill atleast course_title and course_credits"});
             return ;
         }
