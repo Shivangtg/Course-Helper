@@ -31,7 +31,7 @@ const UpdatePage = () => {
   //Setting User Context
   
   const {userState}=useUserContext()
-  const navigate=useNavigate
+  const navigate=useNavigate()
 
 
 
